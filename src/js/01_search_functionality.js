@@ -64,3 +64,12 @@ const handlerFunctionClick = (event) => {
 };
 
 buttonSearch.addEventListener('click', handlerFunctionClick);
+
+const handlerFunctionWrite = (event) => {
+  event.preventDefault();
+  if (event.key === 'Enter') {
+    buttonSearch.click();
+  }
+};
+
+input.addEventListener('keyup', handlerFunctionWrite);
