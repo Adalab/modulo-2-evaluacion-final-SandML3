@@ -72,7 +72,7 @@ const getApiData = (url, inputValue) => {
     });
 };
 
-const getDataLocalStorage = (inputValue) => JSON.parse(localStorage.getItem(inputValue));
+const getDataLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
 
 const searchDataInLocalStorage = (apiUrl, inputValue) => localStorage.getItem(inputValue) !== null
   ? getDataLocalStorage(inputValue)

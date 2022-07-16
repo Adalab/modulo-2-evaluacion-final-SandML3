@@ -25,7 +25,6 @@ const addFavouriteAnime = (card) => {
 const addStyleFavourite = () => {
   const seriesContainer = document.querySelector('.js-favourites-container');
   const favouriteElements = seriesContainer.querySelectorAll('.js-serie-card');
-  console.log(favouriteElements);
   favouriteElements.forEach(item => item.classList.add('favourite'));
 };
 
@@ -44,3 +43,10 @@ const addEventToSerie = () => {
   results.forEach(card => card.addEventListener('click', handlerFunctionFavourite));
 };
 
+const renderFavouritesDataLS = () => {
+  favouriteAnimes = getDataLocalStorage('favouritesList');
+  renderFavourites(favouriteAnimes);
+  addStyleFavourite();
+};
+
+renderFavouritesDataLS();
