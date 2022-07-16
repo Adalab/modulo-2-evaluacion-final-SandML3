@@ -62,21 +62,53 @@ const getSerieObj = (series, container) => {
 const saveResultsLocalStorage = (data, key) => localStorage.setItem(key, JSON.stringify(data));
 
 
-const getApiData = (url, inputValue) => {
+const validateSeries = (series) => {
+  if (series.length !== 0) {
+    getSerieObj(series, 'results');
+  } else {
+    const resultsContainer = document.querySelector('.js-results-container');
+    const alertText = document.createElement('p');
+    alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
+    resultsContainer.appendChild(alertText);
+  }
+};
+
+
+const getApiData = (url) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
       const series = data.data;
-      saveResultsLocalStorage(series, inputValue);
-      getSerieObj(series, 'results');
+      saveResultsLocalStorage(series, input.value);
+      validateSeries(series);
     });
 };
 
 const getDataLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
 
-const searchDataInLocalStorage = (apiUrl, inputValue) => localStorage.getItem(inputValue) !== null
-  ? getDataLocalStorage(inputValue)
-  : getApiData(apiUrl, inputValue);
+
+const validateDataLS = (inputValue) => {
+  if (getDataLocalStorage(inputValue).length !== 0) {
+    const series = getDataLocalStorage(inputValue);
+    getSerieObj(series, 'results');
+  } else {
+    const resultsContainer = document.querySelector('.js-results-container');
+    const alertText = document.createElement('p');
+    alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
+    resultsContainer.appendChild(alertText);
+  }
+};
+
+
+const searchDataInLocalStorage = (apiUrl, inputValue) => {
+  if (localStorage.getItem(inputValue) !== null) {
+    console.log('Estaba guardado');
+    validateDataLS(inputValue);
+  } else {
+    console.log('Llamando API');
+    getApiData(apiUrl);
+  }
+};
 
 
 const resetContainer = (container) => {
@@ -88,15 +120,14 @@ const handlerFunctionClick = (event) => {
   resetContainer('results');
   const inputValue = input.value;
   const apiUrl = `https://api.jikan.moe/v4/anime?q=${inputValue}`;
-  const series = searchDataInLocalStorage(apiUrl, inputValue);
-  getSerieObj(series, 'results');
+  searchDataInLocalStorage(apiUrl, inputValue);
 };
 
 buttonSearch.addEventListener('click', handlerFunctionClick);
 
 const handlerFunctionWrite = (event) => {
-  event.preventDefault();
   if (event.key === 'Enter') {
+    event.preventDefault();
     buttonSearch.click();
   }
 };

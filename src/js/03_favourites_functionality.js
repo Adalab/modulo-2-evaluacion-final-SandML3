@@ -3,9 +3,6 @@
 let favouriteAnimes = [];
 
 
-// const addStylesFavourites = () => 
-
-
 const renderFavourites = (favouriteAnimes) => {
   getSerieObj(favouriteAnimes,'favourites');
 };
@@ -49,4 +46,6 @@ const renderFavouritesDataLS = () => {
   addStyleFavourite();
 };
 
-renderFavouritesDataLS();
+if (getDataLocalStorage('favouritesList') !== null) {
+  renderFavouritesDataLS();
+}
