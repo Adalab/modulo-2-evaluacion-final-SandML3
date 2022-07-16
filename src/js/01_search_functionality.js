@@ -16,13 +16,13 @@ const renderSerieObj = (serie, container) => {
   let sectionTitle =  '';
   container === 'results'
     ? sectionTitle = 'Resultados'
-    : sectionTitle = 'Favoritos';
+    : sectionTitle = 'Series favoritas';
 
   const seriesContainer = document.querySelector('.js-series-container');
   const subContainer = document.querySelector(`.js-${container}-container`);
-  const wrapper = document.createElement('div');
+  const wrapper = document.querySelector(`.js-${container}-wrapper`);
 
-  const containerTitle = document.querySelector((`.js-${container}-wrapper`));
+  const containerTitle = document.querySelector((`.js-${container}-title`));
   containerTitle.innerHTML = sectionTitle;
 
   const serieCard = document.createElement('article');
@@ -38,7 +38,6 @@ const renderSerieObj = (serie, container) => {
   cardImg.setAttribute('src', serie.images.jpg.image_url);
 
   serieCard.append(cardTitle, cardImg);
-  subContainer.appendChild(wrapper);
   wrapper.appendChild(serieCard);
   seriesContainer.appendChild(subContainer);
   addEventToSerie();
@@ -112,7 +111,10 @@ const searchDataInLocalStorage = (apiUrl, inputValue) => {
 
 
 const resetContainer = (container) => {
-  const resultsContainer = document.querySelector(`.js-${container}-wrapper`);resultsContainer.innerHTML = '';
+  const seriesContainer = document.querySelector(`.js-${container}-wrapper`);
+  if (seriesContainer) {
+    seriesContainer.innerHTML = '';
+  }
 };
 
 const handlerFunctionClick = (event) => {

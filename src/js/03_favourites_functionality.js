@@ -9,8 +9,9 @@ const renderFavourites = (favouriteAnimes) => {
 
 
 const addFavouriteAnime = (card) => {
-  const series = getDataLocalStorage(input.value);
+  const series = getDataLocalStorage('favouritesList');
   const serieSelected = parseInt(card.id);
+  console.log(series);
   const selectedSerieObj = series.find(serie => serie.mal_id === serieSelected);
   const indexOfSelectedSerie = favouriteAnimes.findIndex(serie => serie.mal_id === serieSelected);
   indexOfSelectedSerie === -1
