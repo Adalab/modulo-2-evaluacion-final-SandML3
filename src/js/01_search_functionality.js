@@ -6,13 +6,13 @@ const buttonSearch = document.querySelector('.js-button-search');
 const input = document.querySelector('.js-input');
 
 
-
 const renderSerieObj = (serie) => {
   const seriesContainer = document.querySelector('.js-series-container');
   const resultsContainer = document.querySelector('.js-results-container');
 
   const serieCard = document.createElement('article');
-  serieCard.setAttribute('class', 'main__series__results__card');
+  serieCard.setAttribute('class', 'main__series__results__card js-serie-card');
+  serieCard.setAttribute('id', serie.mal_id);
 
   const cardTitle = document.createElement('h4');
   cardTitle.setAttribute('class', 'card__title');
@@ -25,7 +25,7 @@ const renderSerieObj = (serie) => {
   serieCard.append(cardTitle, cardImg);
   resultsContainer.appendChild(serieCard);
   seriesContainer.appendChild(resultsContainer);
-
+  addEventToSerie();
 };
 
 const imageReplace = (serie) => {
@@ -42,14 +42,25 @@ const getSerieObj = (series) => {
   });
 };
 
-const getApiData = (url) => {
+
+const saveResultsLocalStorage = (series, inputValue) => localStorage.setItem(inputValue, JSON.stringify(series));
+
+
+const getApiData = (url, inputValue) => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
       const series = data.data;
-      getSerieObj(series);
+      saveResultsLocalStorage(series, inputValue);
     });
 };
+
+const getDataLocalStorage = (inputValue) => JSON.parse(localStorage.getItem(inputValue));
+
+const searchDataInLocalStorage = (apiUrl, inputValue) => localStorage.getItem(inputValue) !== null
+  ? getDataLocalStorage(inputValue)
+  : getApiData(apiUrl, inputValue);
+
 
 const resetResultsContainer = () => {
   const resultsContainer = document.querySelector('.js-results-container');resultsContainer.innerHTML = '';
@@ -60,7 +71,8 @@ const handlerFunctionClick = (event) => {
   resetResultsContainer();
   const inputValue = input.value;
   const apiUrl = `https://api.jikan.moe/v4/anime?q=${inputValue}`;
-  getApiData(apiUrl);
+  const series = searchDataInLocalStorage(apiUrl, inputValue);
+  getSerieObj(series);
 };
 
 buttonSearch.addEventListener('click', handlerFunctionClick);
