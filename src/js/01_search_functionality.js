@@ -19,12 +19,11 @@ const renderSerieObj = (serie, container) => {
     : sectionTitle = 'Favoritos';
 
   const seriesContainer = document.querySelector('.js-series-container');
-  const resultsContainer = document.querySelector(`.js-${container}-container`);
+  const subContainer = document.querySelector(`.js-${container}-container`);
+  const wrapper = document.createElement('div');
 
-  const resultsContainerTitle = document.createElement('h2');
-  const containerTitleContent = document.createTextNode(sectionTitle);
-  resultsContainerTitle.appendChild(containerTitleContent);
-
+  const containerTitle = document.querySelector((`.js-${container}-wrapper`));
+  containerTitle.innerHTML = sectionTitle;
 
   const serieCard = document.createElement('article');
   serieCard.setAttribute('class', 'main__series__results__card js-serie-card');
@@ -39,8 +38,9 @@ const renderSerieObj = (serie, container) => {
   cardImg.setAttribute('src', serie.images.jpg.image_url);
 
   serieCard.append(cardTitle, cardImg);
-  resultsContainer.append(resultsContainerTitle, serieCard);
-  seriesContainer.appendChild(resultsContainer);
+  subContainer.appendChild(wrapper);
+  wrapper.appendChild(serieCard);
+  seriesContainer.appendChild(subContainer);
   addEventToSerie();
 };
 
@@ -112,7 +112,7 @@ const searchDataInLocalStorage = (apiUrl, inputValue) => {
 
 
 const resetContainer = (container) => {
-  const resultsContainer = document.querySelector(`.js-${container}-container`);resultsContainer.innerHTML = '';
+  const resultsContainer = document.querySelector(`.js-${container}-wrapper`);resultsContainer.innerHTML = '';
 };
 
 const handlerFunctionClick = (event) => {
