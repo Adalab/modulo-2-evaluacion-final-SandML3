@@ -7,7 +7,7 @@ const resetInput = () => input.value = '';
 
 const handlerFunctionReset = (event) => {
   event.preventDefault();
-  resetResultsContainer();
+  resetContainer('results');
   resetInput();
 };
 

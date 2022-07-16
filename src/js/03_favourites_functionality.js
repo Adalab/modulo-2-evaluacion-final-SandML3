@@ -3,6 +3,14 @@
 let favouriteAnimes = [];
 
 
+// const addStylesFavourites = () => 
+
+
+const renderFavourites = (favouriteAnimes) => {
+  getSerieObj(favouriteAnimes,'favourites');
+};
+
+
 const addFavouriteAnime = (card) => {
   const series = getDataLocalStorage(input.value);
   const serieSelected = parseInt(card.id);
@@ -13,9 +21,22 @@ const addFavouriteAnime = (card) => {
     : favouriteAnimes.splice(indexOfSelectedSerie, 1);
 };
 
+
+const addStyleFavourite = () => {
+  const seriesContainer = document.querySelector('.js-favourites-container');
+  const favouriteElements = seriesContainer.querySelectorAll('.js-serie-card');
+  console.log(favouriteElements);
+  favouriteElements.forEach(item => item.classList.add('favourite'));
+};
+
+
 function handlerFunctionFavourite (event) {
   const card = event.currentTarget;
   addFavouriteAnime(card);
+  resetContainer('favourites');
+  saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
+  renderFavourites(favouriteAnimes);
+  addStyleFavourite();
 }
 
 const addEventToSerie = () => {

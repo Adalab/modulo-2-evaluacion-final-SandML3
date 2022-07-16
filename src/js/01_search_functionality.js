@@ -6,9 +6,25 @@ const buttonSearch = document.querySelector('.js-button-search');
 const input = document.querySelector('.js-input');
 
 
-const renderSerieObj = (serie) => {
+// const chooseContainerTitle = (container) => {
+//   container === 'results'
+//     ? sectionTitle = 'Resultados'
+//     : sectionTitle = 'Favoritos';
+// }
+
+const renderSerieObj = (serie, container) => {
+  let sectionTitle =  '';
+  container === 'results'
+    ? sectionTitle = 'Resultados'
+    : sectionTitle = 'Favoritos';
+
   const seriesContainer = document.querySelector('.js-series-container');
-  const resultsContainer = document.querySelector('.js-results-container');
+  const resultsContainer = document.querySelector(`.js-${container}-container`);
+
+  const resultsContainerTitle = document.createElement('h2');
+  const containerTitleContent = document.createTextNode(sectionTitle);
+  resultsContainerTitle.appendChild(containerTitleContent);
+
 
   const serieCard = document.createElement('article');
   serieCard.setAttribute('class', 'main__series__results__card js-serie-card');
@@ -23,7 +39,7 @@ const renderSerieObj = (serie) => {
   cardImg.setAttribute('src', serie.images.jpg.image_url);
 
   serieCard.append(cardTitle, cardImg);
-  resultsContainer.appendChild(serieCard);
+  resultsContainer.append(resultsContainerTitle, serieCard);
   seriesContainer.appendChild(resultsContainer);
   addEventToSerie();
 };
@@ -35,15 +51,15 @@ const imageReplace = (serie) => {
   }
 };
 
-const getSerieObj = (series) => {
+const getSerieObj = (series, container) => {
   series.forEach(serie => {
     imageReplace(serie);
-    renderSerieObj(serie);
+    renderSerieObj(serie, container);
   });
 };
 
 
-const saveResultsLocalStorage = (series, inputValue) => localStorage.setItem(inputValue, JSON.stringify(series));
+const saveResultsLocalStorage = (data, key) => localStorage.setItem(key, JSON.stringify(data));
 
 
 const getApiData = (url, inputValue) => {
@@ -52,6 +68,7 @@ const getApiData = (url, inputValue) => {
     .then(data => {
       const series = data.data;
       saveResultsLocalStorage(series, inputValue);
+      getSerieObj(series, 'results');
     });
 };
 
@@ -62,17 +79,17 @@ const searchDataInLocalStorage = (apiUrl, inputValue) => localStorage.getItem(in
   : getApiData(apiUrl, inputValue);
 
 
-const resetResultsContainer = () => {
-  const resultsContainer = document.querySelector('.js-results-container');resultsContainer.innerHTML = '';
+const resetContainer = (container) => {
+  const resultsContainer = document.querySelector(`.js-${container}-container`);resultsContainer.innerHTML = '';
 };
 
 const handlerFunctionClick = (event) => {
   event.preventDefault();
-  resetResultsContainer();
+  resetContainer('results');
   const inputValue = input.value;
   const apiUrl = `https://api.jikan.moe/v4/anime?q=${inputValue}`;
   const series = searchDataInLocalStorage(apiUrl, inputValue);
-  getSerieObj(series);
+  getSerieObj(series, 'results');
 };
 
 buttonSearch.addEventListener('click', handlerFunctionClick);
