@@ -18,6 +18,13 @@ const addIconResetFavourites = (container, serieCard) => {
 };
 
 
+const checkIfResultIsInFavourites = (serie, serieCard) => {
+  const index = favouriteAnimes.findIndex(element => element.mal_id === serie.mal_id);
+  index !== -1
+    ? serieCard.setAttribute('class', 'main__series__card js-serie-card favourite')
+    : serieCard.setAttribute('class', 'main__series__card js-serie-card');
+};
+
 
 const renderSerieObj = (serie, container) => {
   let sectionTitle =  '';
@@ -33,8 +40,8 @@ const renderSerieObj = (serie, container) => {
   containerTitle.innerHTML = sectionTitle;
 
   const serieCard = document.createElement('article');
-  serieCard.setAttribute('class', 'main__series__card js-serie-card');
   serieCard.setAttribute('id', serie.mal_id);
+  checkIfResultIsInFavourites(serie, serieCard);
 
   const cardTitle = document.createElement('h4');
   cardTitle.setAttribute('class', 'card__title');

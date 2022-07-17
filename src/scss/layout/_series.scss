@@ -31,6 +31,12 @@
         .main__series__card {
             width: auto;
 
+            .card__title {
+                max-width: 14rem;
+                margin: 0 auto;
+            
+            }
+
             & .card__img {
                 border-radius: 20px;
             }

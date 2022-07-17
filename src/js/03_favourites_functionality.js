@@ -1,5 +1,5 @@
 'use strict';
-
+const resultsContainer = document.querySelector('.js-results-container');
 let favouriteAnimes = [];
 
 
@@ -8,11 +8,17 @@ const addStyleFavourite = (array) => array.forEach(item => item.classList.add('f
 
 const renderFavourites = (favouriteAnimes) => getSerieObj(favouriteAnimes,'favourites');
 
+const selectResultElement = (serie) => {
+  document.getElementById(serie).classList.add('favourite');
+};
+
+
 
 const addFavouriteAnime = (card) => {
   const series = getDataLocalStorage(input.value);
   const serieSelected = parseInt(card.id);
   const selectedSerieObj = series.find(serie => serie.mal_id === serieSelected);
+  selectResultElement(serieSelected);
   const indexOfSelectedSerie = favouriteAnimes.findIndex(serie => serie.mal_id === serieSelected);
   indexOfSelectedSerie === -1
     ? favouriteAnimes.push(selectedSerieObj)
@@ -39,7 +45,6 @@ function handlerClickResultsSeries (event) {
 }
 
 const addEventToSerie = () => {
-  const resultsContainer = document.querySelector('.js-results-container');
   const results = resultsContainer.querySelectorAll('.js-serie-card');
   results.forEach(card => card.addEventListener('click', handlerClickResultsSeries));
 };
