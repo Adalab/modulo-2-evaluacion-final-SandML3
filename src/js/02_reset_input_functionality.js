@@ -11,6 +11,4 @@ const handlerFunctionReset = (event) => {
   resetInput();
 };
 
-
-
 buttonReset.addEventListener('click', handlerFunctionReset);

@@ -6,12 +6,15 @@ const buttonSearch = document.querySelector('.js-button-search');
 const input = document.querySelector('.js-input');
 
 
+
 const addIconResetFavourites = (container, serieCard) => {
   if (container === 'favourites') {
     const icon = document.createElement('i');
     icon.setAttribute('class', 'fa-solid fa-xmark card__icon');
+    icon.setAttribute('title', 'Eliminar de favoritos');
     serieCard.appendChild(icon);
   }
+  addEventToIcon();
 };
 
 
@@ -115,13 +118,9 @@ const validateDataLS = (inputValue) => {
 
 
 const searchDataInLocalStorage = (apiUrl, inputValue) => {
-  if (localStorage.getItem(inputValue) !== null) {
-    // console.log('Estaba guardado');
-    validateDataLS(inputValue);
-  } else {
-    // console.log('Llamando API');
-    getApiData(apiUrl);
-  }
+  localStorage.getItem(inputValue) !== null
+    ? validateDataLS(inputValue)
+    : getApiData(apiUrl);
 };
 
 
@@ -141,6 +140,10 @@ const handlerFunctionClick = (event) => {
 };
 
 buttonSearch.addEventListener('click', handlerFunctionClick);
+
+
+
+//Add keyup listener to avoid reload page when user press enter key.
 
 const handlerFunctionWrite = (event) => {
   if (event.key === 'Enter') {

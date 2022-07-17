@@ -27,7 +27,9 @@ const selectFavouriteSeries = () => {
 };
 
 
-function handlerFunctionFavourite (event) {
+//Click event listening on all result series.
+
+function handlerClickResultsSeries (event) {
   const card = event.currentTarget;
   addFavouriteAnime(card);
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
@@ -37,15 +39,19 @@ function handlerFunctionFavourite (event) {
 }
 
 const addEventToSerie = () => {
-  const results = document.querySelectorAll('.js-serie-card');
-  results.forEach(card => card.addEventListener('click', handlerFunctionFavourite));
+  const resultsContainer = document.querySelector('.js-results-container');
+  const results = resultsContainer.querySelectorAll('.js-serie-card');
+  results.forEach(card => card.addEventListener('click', handlerClickResultsSeries));
 };
 
+
+//Get favorites data from local storage.
 const renderFavouritesDataLS = () => {
   favouriteAnimes = getDataLocalStorage('favouritesList');
   renderFavourites(favouriteAnimes);
   selectFavouriteSeries();
 };
+
 
 if (getDataLocalStorage('favouritesList') !== null) {
   renderFavouritesDataLS();
