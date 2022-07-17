@@ -3,15 +3,15 @@
 let favouriteAnimes = [];
 
 
-const renderFavourites = (favouriteAnimes) => {
-  getSerieObj(favouriteAnimes,'favourites');
-};
+const addStyleFavourite = (array) => array.forEach(item => item.classList.add('favourite'));
+
+
+const renderFavourites = (favouriteAnimes) => getSerieObj(favouriteAnimes,'favourites');
 
 
 const addFavouriteAnime = (card) => {
-  const series = getDataLocalStorage('favouritesList');
+  const series = getDataLocalStorage(input.value);
   const serieSelected = parseInt(card.id);
-  console.log(series);
   const selectedSerieObj = series.find(serie => serie.mal_id === serieSelected);
   const indexOfSelectedSerie = favouriteAnimes.findIndex(serie => serie.mal_id === serieSelected);
   indexOfSelectedSerie === -1
@@ -20,20 +20,20 @@ const addFavouriteAnime = (card) => {
 };
 
 
-const addStyleFavourite = () => {
+const selectFavouriteSeries = () => {
   const seriesContainer = document.querySelector('.js-favourites-container');
   const favouriteElements = seriesContainer.querySelectorAll('.js-serie-card');
-  favouriteElements.forEach(item => item.classList.add('favourite'));
+  addStyleFavourite(favouriteElements);
 };
 
 
 function handlerFunctionFavourite (event) {
   const card = event.currentTarget;
   addFavouriteAnime(card);
-  resetContainer('favourites');
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
+  resetContainer('favourites');
   renderFavourites(favouriteAnimes);
-  addStyleFavourite();
+  selectFavouriteSeries();
 }
 
 const addEventToSerie = () => {
@@ -44,9 +44,10 @@ const addEventToSerie = () => {
 const renderFavouritesDataLS = () => {
   favouriteAnimes = getDataLocalStorage('favouritesList');
   renderFavourites(favouriteAnimes);
-  addStyleFavourite();
+  selectFavouriteSeries();
 };
 
 if (getDataLocalStorage('favouritesList') !== null) {
   renderFavouritesDataLS();
 }
+

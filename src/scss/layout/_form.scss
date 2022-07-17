@@ -1,0 +1,52 @@
+
+.main {
+    font-size: $main_font_size;
+    font-weight: 300;
+
+    &__form {
+        padding: 5rem;
+        padding-left: 15rem;
+        display: grid;
+        grid-template-columns: 40rem 10rem 10rem;
+        grid-template-rows: 3rem 3rem;
+        gap: 1rem 2rem;
+       
+
+        ::placeholder {
+            font-family: $main_font_family;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        &__label {
+            
+        }
+
+        &__input {
+            border-radius: 5px;
+            width: 39rem;
+            height: 2.5rem;
+            grid-row: 2;
+            font-family: $main_font_family;
+            font-size: 1.5rem;
+            font-weight: 300;
+            padding-left: 1.2rem;
+        }
+
+        &__input:focus {
+            font-family: $main_font_family;
+        }
+
+        &__button--reset {
+            border-radius: 5px;
+            font-size: 1.5rem;
+            grid-row: 2;
+        }
+
+        &__button--search {
+            border-radius: 5px;
+            font-size: 1.5rem;
+            grid-row: 2;
+        }
+    }
+}

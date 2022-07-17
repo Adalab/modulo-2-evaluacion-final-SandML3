@@ -6,11 +6,15 @@ const buttonSearch = document.querySelector('.js-button-search');
 const input = document.querySelector('.js-input');
 
 
-// const chooseContainerTitle = (container) => {
-//   container === 'results'
-//     ? sectionTitle = 'Resultados'
-//     : sectionTitle = 'Favoritos';
-// }
+const addIconResetFavourites = (container, serieCard) => {
+  if (container === 'favourites') {
+    const icon = document.createElement('i');
+    icon.setAttribute('class', 'fa-solid fa-xmark card__icon');
+    serieCard.appendChild(icon);
+  }
+};
+
+
 
 const renderSerieObj = (serie, container) => {
   let sectionTitle =  '';
@@ -26,7 +30,7 @@ const renderSerieObj = (serie, container) => {
   containerTitle.innerHTML = sectionTitle;
 
   const serieCard = document.createElement('article');
-  serieCard.setAttribute('class', 'main__series__results__card js-serie-card');
+  serieCard.setAttribute('class', 'main__series__card js-serie-card');
   serieCard.setAttribute('id', serie.mal_id);
 
   const cardTitle = document.createElement('h4');
@@ -34,12 +38,17 @@ const renderSerieObj = (serie, container) => {
   const titleContent = document.createTextNode(serie.title);
   cardTitle.appendChild(titleContent);
 
-  const cardImg = document.createElement('img');
-  cardImg.setAttribute('src', serie.images.jpg.image_url);
+  const imgConatiner = document.createElement('div');
+  imgConatiner.style.backgroundImage = `url(${serie.images.jpg.image_url})`;
+  imgConatiner.setAttribute('class', 'card__img');
+  imgConatiner.setAttribute('title', serie.title);
+  // const cardImg = document.createElement('img');
+  // cardImg.setAttribute('src', serie.images.jpg.image_url);
 
-  serieCard.append(cardTitle, cardImg);
+  serieCard.append(imgConatiner, cardTitle);
   wrapper.appendChild(serieCard);
   seriesContainer.appendChild(subContainer);
+  addIconResetFavourites(container, serieCard);
   addEventToSerie();
 };
 
@@ -49,6 +58,8 @@ const imageReplace = (serie) => {
     serie.images.jpg.image_url = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
   }
 };
+
+
 
 const getSerieObj = (series, container) => {
   series.forEach(serie => {
@@ -60,15 +71,22 @@ const getSerieObj = (series, container) => {
 
 const saveResultsLocalStorage = (data, key) => localStorage.setItem(key, JSON.stringify(data));
 
+function messageNotFound () {
+  const containerTitle = document.querySelector(('.js-results-title'));
+  containerTitle.innerHTML = 'Resultados';
+
+  const resultsContainer = document.querySelector('.js-results-wrapper');
+  resultsContainer.innerHTML = '';
+  const alertText = document.createElement('p');
+  alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
+  resultsContainer.appendChild(alertText);
+}
 
 const validateSeries = (series) => {
   if (series.length !== 0) {
     getSerieObj(series, 'results');
   } else {
-    const resultsContainer = document.querySelector('.js-results-container');
-    const alertText = document.createElement('p');
-    alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
-    resultsContainer.appendChild(alertText);
+    messageNotFound();
   }
 };
 
@@ -91,20 +109,17 @@ const validateDataLS = (inputValue) => {
     const series = getDataLocalStorage(inputValue);
     getSerieObj(series, 'results');
   } else {
-    const resultsContainer = document.querySelector('.js-results-container');
-    const alertText = document.createElement('p');
-    alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
-    resultsContainer.appendChild(alertText);
+    messageNotFound();
   }
 };
 
 
 const searchDataInLocalStorage = (apiUrl, inputValue) => {
   if (localStorage.getItem(inputValue) !== null) {
-    console.log('Estaba guardado');
+    // console.log('Estaba guardado');
     validateDataLS(inputValue);
   } else {
-    console.log('Llamando API');
+    // console.log('Llamando API');
     getApiData(apiUrl);
   }
 };
@@ -130,7 +145,6 @@ buttonSearch.addEventListener('click', handlerFunctionClick);
 const handlerFunctionWrite = (event) => {
   if (event.key === 'Enter') {
     event.preventDefault();
-    buttonSearch.click();
   }
 };
 
