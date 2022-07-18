@@ -3,48 +3,52 @@ const resultsContainer = document.querySelector('.js-results-container');
 let favouriteAnimes = [];
 
 
-const addStyleFavourite = (array) => array.forEach(item => item.classList.add('favourite'));
+// const addStyleFavourite = (array) => array.forEach(item => item.classList.add('favourite'));
 
+// const renderFavourites = (favouriteAnimes) => getSerieObj(favouriteAnimes,'favourites');
 
-const renderFavourites = (favouriteAnimes) => getSerieObj(favouriteAnimes,'favourites');
-
-const selectResultElement = (serie) => {
-  document.getElementById(serie).classList.add('favourite');
+const addToFavourites = (objet,htmlElement) => {
+  favouriteAnimes.push(objet);
+  htmlElement.classList.add('favourite');
 };
 
+const removeToFavourites = (indexOfElement,htmlElement) => {
+  favouriteAnimes.splice(indexOfElement, 1);
+  htmlElement.classList.remove('favourite');
+};
 
-
-const addFavouriteAnime = (card) => {
+const checkIfIsFavourite = (card) => {
   const series = getDataLocalStorage(input.value);
-  const serieSelected = parseInt(card.id);
-  const selectedSerieObj = series.find(serie => serie.mal_id === serieSelected);
-  selectResultElement(serieSelected);
-  const indexOfSelectedSerie = favouriteAnimes.findIndex(serie => serie.mal_id === serieSelected);
+  const serieSelected = card;
+  const idSerieSelected = parseInt(card.id);
+  const selectedSerieObj = series.find(serie => serie.mal_id === idSerieSelected);
+  const indexOfSelectedSerie = favouriteAnimes.findIndex(serie => serie.mal_id === idSerieSelected);
   indexOfSelectedSerie === -1
-    ? favouriteAnimes.push(selectedSerieObj)
-    : favouriteAnimes.splice(indexOfSelectedSerie, 1);
+    ? addToFavourites(selectedSerieObj, serieSelected)
+    : removeToFavourites(indexOfSelectedSerie, serieSelected);
 };
 
 
-const selectFavouriteSeries = () => {
-  const seriesContainer = document.querySelector('.js-favourites-container');
-  const favouriteElements = seriesContainer.querySelectorAll('.js-serie-card');
-  addStyleFavourite(favouriteElements);
-};
+// const selectFavouriteSeries = () => {
+//   const seriesContainer = document.querySelector('.js-favourites-container');
+//   const favouriteElements = seriesContainer.querySelectorAll('.js-serie-card');
+//   addStyleFavourite(favouriteElements);
+// };
 
 
 //Click event listening on all result series.
 
 function handlerClickResultsSeries (event) {
   const card = event.currentTarget;
-  addFavouriteAnime(card);
+  checkIfIsFavourite(card);
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
   resetContainer('favourites');
-  renderFavourites(favouriteAnimes);
-  selectFavouriteSeries();
+  getSerieObj(favouriteAnimes,'favourites');
+  // renderFavourites(favouriteAnimes);
+  // selectFavouriteSeries();
 }
 
-const addEventToSerie = () => {
+const addEventToResultsSerie = () => {
   const results = resultsContainer.querySelectorAll('.js-serie-card');
   results.forEach(card => card.addEventListener('click', handlerClickResultsSeries));
 };
@@ -53,8 +57,9 @@ const addEventToSerie = () => {
 //Get favorites data from local storage.
 const renderFavouritesDataLS = () => {
   favouriteAnimes = getDataLocalStorage('favouritesList');
-  renderFavourites(favouriteAnimes);
-  selectFavouriteSeries();
+  getSerieObj(favouriteAnimes,'favourites');
+  // renderFavourites(favouriteAnimes);
+  // selectFavouriteSeries();
 };
 
 

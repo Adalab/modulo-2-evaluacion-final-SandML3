@@ -58,8 +58,9 @@ const renderSerieObj = (serie, container) => {
   serieCard.append(imgConatiner, cardTitle);
   wrapper.appendChild(serieCard);
   seriesContainer.appendChild(subContainer);
+
   addIconResetFavourites(container, serieCard);
-  addEventToSerie();
+  addEventToResultsSerie();
 };
 
 const imageReplace = (serie) => {
@@ -92,13 +93,10 @@ function messageNotFound () {
   resultsContainer.appendChild(alertText);
 }
 
-const validateSeries = (series) => {
-  if (series.length !== 0) {
-    getSerieObj(series, 'results');
-  } else {
-    messageNotFound();
-  }
-};
+
+const isArrayEmpty = (array) => array.length !== 0
+  ? getSerieObj(array, 'results')
+  : messageNotFound();
 
 
 const getApiData = (url) => {
@@ -107,26 +105,17 @@ const getApiData = (url) => {
     .then(data => {
       const series = data.data;
       saveResultsLocalStorage(series, input.value);
-      validateSeries(series);
+      isArrayEmpty(series);
     });
 };
 
 const getDataLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
 
 
-const validateDataLS = (inputValue) => {
-  if (getDataLocalStorage(inputValue).length !== 0) {
-    const series = getDataLocalStorage(inputValue);
-    getSerieObj(series, 'results');
-  } else {
-    messageNotFound();
-  }
-};
-
-
 const searchDataInLocalStorage = (apiUrl, inputValue) => {
-  localStorage.getItem(inputValue) !== null
-    ? validateDataLS(inputValue)
+  const dataFromLocalStorage =  getDataLocalStorage(inputValue);
+  dataFromLocalStorage !== null
+    ? isArrayEmpty(dataFromLocalStorage)
     : getApiData(apiUrl);
 };
 

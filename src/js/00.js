@@ -13,7 +13,7 @@ const handlerFunctionIconsClick = (event) => {
   deleteSerieOfFavourites(serieToDelete);
   resetContainer('favourites');
   getSerieObj(favouriteAnimes, 'favourites');
-  selectFavouriteSeries();
+  // selectFavouriteSeries();
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
 };
 
