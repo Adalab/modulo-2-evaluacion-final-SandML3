@@ -1,6 +1,18 @@
 'use strict';
 
 
+const resetInput = () => input.value = '';
+
+const handlerFunctionReset = (event) => {
+  event.preventDefault();
+  resetContainer('results');
+  resetInput();
+};
+
+buttonReset.addEventListener('click', handlerFunctionReset);
+
+
+//Delete of favourites functionality
 const deleteSerieOfFavourites = (serieToDelete) => {
   const idElementSelected = parseInt(serieToDelete.id);
   const indexOfElement = favouriteAnimes.findIndex(favorito => favorito.mal_id === idElementSelected);
@@ -13,7 +25,6 @@ const handlerFunctionIconsClick = (event) => {
   deleteSerieOfFavourites(serieToDelete);
   resetContainer('favourites');
   getSerieObj(favouriteAnimes, 'favourites');
-  // selectFavouriteSeries();
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
 };
 

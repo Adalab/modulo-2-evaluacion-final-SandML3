@@ -2,10 +2,6 @@
 
 
 //Create and define event on search button.
-const buttonSearch = document.querySelector('.js-button-search');
-const input = document.querySelector('.js-input');
-
-
 
 const addIconResetFavourites = (container, serieCard) => {
   if (container === 'favourites') {
@@ -52,8 +48,6 @@ const renderSerieObj = (serie, container) => {
   imgConatiner.style.backgroundImage = `url(${serie.images.jpg.image_url})`;
   imgConatiner.setAttribute('class', 'card__img');
   imgConatiner.setAttribute('title', serie.title);
-  // const cardImg = document.createElement('img');
-  // cardImg.setAttribute('src', serie.images.jpg.image_url);
 
   serieCard.append(imgConatiner, cardTitle);
   wrapper.appendChild(serieCard);
