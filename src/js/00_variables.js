@@ -1,5 +1,6 @@
 'use strict';
 
+//Variables
 const buttonSearch = document.querySelector('.js-button-search');
 const buttonReset = document.querySelector('.js-button-reset');
 const buttonResetFavourites = document.querySelector('.js-button-reset-favourites');

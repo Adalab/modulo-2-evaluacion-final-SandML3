@@ -1,5 +1,6 @@
 'use strict';
 
+// 'click' listener on series into results section.
 
 const addToFavourites = (objet,htmlElement) => {
   favouriteAnimes.push(objet);
