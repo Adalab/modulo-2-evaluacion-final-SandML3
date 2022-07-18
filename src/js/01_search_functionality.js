@@ -49,6 +49,7 @@ const renderSerieObj = (serie, container) => {
   imgConatiner.setAttribute('class', 'card__img');
   imgConatiner.setAttribute('title', serie.title);
 
+  console.log(container);
   serieCard.append(imgConatiner, cardTitle);
   wrapper.appendChild(serieCard);
   seriesContainer.appendChild(subContainer);
@@ -83,8 +84,10 @@ function messageNotFound () {
   const resultsContainer = document.querySelector('.js-results-wrapper');
   resultsContainer.innerHTML = '';
   const alertText = document.createElement('p');
-  alertText.appendChild(document.createTextNode('No se ha encontrado ninguna coincidencia'));
-  resultsContainer.appendChild(alertText);
+  alertText.setAttribute('class', 'js-data-not-found');
+
+  alertText.appendChild(document.createTextNode('¡Ops! No se ha encontrado ninguna coincidencia'));
+  resultsContainer.append(alertText);
 }
 
 

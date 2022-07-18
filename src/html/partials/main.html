@@ -2,13 +2,16 @@
     <form class="main__form">
         <label for="serie" class="main__form__label">Introduce aquí la serie que quieres buscar:</label>
         <input type="text" id="serie" class="main__form__input js-input" placeholder="Ejemplo: Dragon Ball">
-        <button class="main__form__button--search js-button-search">Buscar</button>
-        <button class="main__form__button--reset js-button-reset">Reset</button>
+        <button class="main__form__button--search main__form__button js-button-search">Buscar</button>
+        <button class="main__form__button--reset main__form__button js-button-reset"
+            title="Reiniciar la búsqueda">Reset</button>
     </form>
+
     <div class="main__series js-series-container">
         <section class="main__series__favourites js-favourites-container">
             <h2 class="main__series__favourites__title js-favourites-title">Series favoritas</h2>
-            <button class="main__series__favourites__button js-button-reset-favourites">Reset</button>
+            <button class="main__series__favourites__button js-button-reset-favourites"
+                title="Vaciar la sección favoritos"><i class="fa-solid fa-trash fa-xl"></i></button>
             <div class="favourites__wrapper js-favourites-wrapper"></div>
         </section>
         <section class="main__series__results js-results-container">

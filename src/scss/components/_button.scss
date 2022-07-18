@@ -1,0 +1,14 @@
+ .main {
+    
+    &__form__button {
+        width: 10rem;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        background-color: rgb(44, 44, 44);
+        color: white;
+        border: transparent;
+        grid-row: 3;
+        grid-column: 1;
+        font-family: $main_font_family;
+    }
+ }
