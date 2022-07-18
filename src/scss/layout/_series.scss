@@ -9,7 +9,9 @@
     &__favourites {
         grid-row: 1;
         border-radius: 10px;
-        display: flex;
+        display: grid;
+        grid-template-columns: 0.3fr 1fr;
+        grid-template-rows: 1fr 1fr;
         padding-right: 5rem;
         max-width: 90vw;
         margin: 0 auto;
@@ -19,6 +21,8 @@
         }
 
         .favourites__wrapper {
+            grid-column: 2;
+            grid-row: 3 / 1;
             display: flex;
             align-items: flex-start;
             padding: 0rem 5rem;
@@ -26,6 +30,15 @@
             overflow-x: scroll;
             overflow-y: hidden;
             gap: 2rem;
+        }
+
+        &__button {
+            grid-column: 1;
+            width: 10rem;
+            height: 3rem;
+            margin: 0 auto;
+            border-radius: 5px;
+         
         }
 
         .main__series__card {
@@ -131,3 +144,4 @@
     }
      
 }
+

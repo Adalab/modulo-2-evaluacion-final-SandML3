@@ -100,7 +100,8 @@ const getApiData = (url) => {
       const series = data.data;
       saveResultsLocalStorage(series, input.value);
       isArrayEmpty(series);
-    });
+    })
+    .catch(error => console.log(`Se ha producido un error ${error}`));
 };
 
 const getDataLocalStorage = (key) => JSON.parse(localStorage.getItem(key));
