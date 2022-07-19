@@ -1,6 +1,7 @@
 .main__series {
     display: grid;
     grid-template-columns: repeat(auto-fill 80vw);
+    
 
     @media all and (min-width: 768px) {
         grid-template-columns: 0.3fr 1fr;
@@ -83,7 +84,9 @@
             background-color: rgba(255, 255, 255, 0.603);
             box-shadow: 5px 5px 25px rgb(0, 0, 0);
             border-radius: 10px;
-            overflow: hidden;       
+            overflow: hidden;  
+            border: transparent;
+                
 
             .card__title {
                 max-width: 14rem;
@@ -224,10 +227,7 @@
 
     }
 
-    .favourite {
-        background-color: orange;
-        border-radius: 3rem;
-    }
+   
 }
 
 
@@ -235,5 +235,21 @@
     width: 90%;
     background-color: white;
     border-radius: 40px;
+    animation: not_favourites 5s;
+
+    @keyframes not_favourites {
+        0% {
+            opacity: 10%;
+            width: 10%;
+        }
+    }
 }
 
+.favourite {
+    background-color: rgb(51, 51, 51);
+    border: 10px solid  rgb(51, 51, 51);
+    border-top: 20px solid  rgb(51, 51, 51);
+    border-radius: 3rem;
+    color: white;
+    filter: drop-shadow(0 0 2rem rgba(59, 59, 59, 0.596));
+}

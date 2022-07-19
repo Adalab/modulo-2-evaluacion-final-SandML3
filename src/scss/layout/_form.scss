@@ -13,9 +13,14 @@
 
     &__form {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 0.6fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
         gap: 1rem;
+
+        @media all and (min-width: 1200px) {
+            display: flex;
+            margin-bottom: 5rem;
+         }
        
         ::placeholder {
             font-family: $main_font_family;
@@ -46,11 +51,11 @@
         }
 
         &__button--reset {
-         margin-left: 12rem;
-        }
+            margin-left: 12rem;
 
-        // &__button--search {
-            
-        // }
+            @media all and (min-width: 1200px) {
+                margin: 0;
+            }
+        }
     }
 }

@@ -1,13 +1,18 @@
 .header {
     margin: 10rem 5rem 5rem;
+    position: relative;
 
 
     @media all and (min-width: 768px) {
         margin: 15rem 10rem 5rem;
     }
+
     @media all and (min-width: 1200px) {
-        margin: 15rem 10rem 5rem;
-        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0;
+        margin-bottom: 15rem;
      }
 
 
@@ -23,7 +28,6 @@
         @media all and (min-width: 1200px) {
             font-size: 6rem;
             line-height: 6.5rem;
-            margin-top: 30rem;
          }
     }
 
@@ -39,124 +43,6 @@
         @media all and (min-width: 1200px) {
             width: 50%;
             max-width: 900px;
-            position: absolute;
-            left: 40vw;
-            bottom: 40vh;
          }
-    }
-
-
-    .bubble {
-        background-color: rgb(255, 255, 255);
-        width: 40%;
-        height: 10%;
-        max-width: 22rem;
-        position: absolute;
-        bottom: 60vh;
-        left: 52vw;
-        border-radius: 6rem;
-        box-shadow: 2px 2px 20px rgb(155, 155, 155);
-        margin-left: 2rem;
-        animation: bubble 4s;
-
-        &__message {
-            font-family: $main_font_family;
-            font-size: 1.6rem;
-            font-weight: 300;
-            width: 20rem;
-            line-height: 1.8rem;
-            text-align: center;
-            margin: 0 auto;
-    
-            @media all and (min-width: 768px) {
-                font-size: 1.8rem;
-                font-weight: 300;
-                line-height: 2rem;
-                width: 20rem;
-                margin: 0 auto;
-                margin-top: 1rem;
-            }
-
-            @media all and (min-width: 1200px) {
-                font-size: 2rem;
-                line-height: rem;
-             }
-        }
-
-
-        @keyframes bubble {
-            0% {
-                opacity: 50%;
-                bottom: 100vh;
-                left: 52vw;
-                width: 30%;
-                height: 10%;
-            }
-
-            50%{
-                bottom: 57vh;
-            }
-        }
-        
-
-        @media all and (min-width: 768px) {
-            max-width: 30rem;
-            width: 30%;
-            height: 13%;
-            bottom: 60vh;
-            left: 65vw;
-            animation: bubble2 4s;
-
-            @keyframes bubble2 {
-                0% {
-                    opacity: 20%;
-                    bottom: 100vh;
-                    left: 65vw;
-                    width: 30%;
-                    height: 10%;
-                }
-    
-                80%{
-                    opacity: 100%;
-                    bottom: 37vh;
-                }
-            }
-        }
-
-        
-        @media all and (min-width: 1200px) {
-            max-width: 30rem;
-            width: 30%;
-            height: 13%;
-            bottom: 70vh;
-            left: 70vw;
-            animation: bubble2 4s;
-
-            @keyframes bubble2 {
-                0% {
-                    opacity: 50%;
-                    bottom: 100vh;
-                    left: 70vw;
-                }
-    
-                80%{
-                    opacity: 100%;
-                    bottom: 65vh;
-                }
-            }
-        }
-
-        
-    }
-
-    .bubble-tail {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 3rem;
-        box-shadow: 3px 3px 20px rgb(59, 59, 59);
-        position: relative;
-        top: 80%;
-        background-color: rgb(255, 255, 255);
-       
     }
 }
