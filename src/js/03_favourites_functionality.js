@@ -45,9 +45,11 @@ const deleteSerieOfFavourites = (serieToDelete) => {
 };
 
 const updateSectionResults = () => {
-  const series = getDataLocalStorage(input.value);
-  resetContainer('results');
-  getSerieObj(series, 'results');
+  if (input.value) {
+    const series = getDataLocalStorage(input.value);
+    resetContainer('results');
+    getSerieObj(series, 'results');
+  }
 };
 
 
@@ -58,6 +60,7 @@ const handlerFunctionIconsClick = (event) => {
   getSerieObj(favouriteAnimes, 'favourites');
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
   updateSectionResults();
+  renderNotFavourites();
 };
 
 
@@ -74,6 +77,7 @@ const handlerFunctionResetFavourites = (event) => {
   favouriteAnimes.splice(0, favouriteAnimes.length);
   saveResultsLocalStorage(favouriteAnimes, 'favouritesList');
   updateSectionResults();
+  renderNotFavourites();
 };
 
 buttonResetFavourites.addEventListener('click', handlerFunctionResetFavourites);

@@ -49,7 +49,6 @@ const renderSerieObj = (serie, container) => {
   imgConatiner.setAttribute('class', 'card__img');
   imgConatiner.setAttribute('title', serie.title);
 
-  console.log(container);
   serieCard.append(imgConatiner, cardTitle);
   wrapper.appendChild(serieCard);
   seriesContainer.appendChild(subContainer);

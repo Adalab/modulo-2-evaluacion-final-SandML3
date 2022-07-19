@@ -4,6 +4,13 @@
     font-weight: 300;
     margin-left: 5rem;
 
+    @media all and (min-width: 768px) {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-left: 10rem;
+    }
+
+
     &__form {
         display: grid;
         grid-template-columns: 1fr 1fr;
