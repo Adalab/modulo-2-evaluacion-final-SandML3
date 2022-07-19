@@ -5,7 +5,7 @@ This exercise has been done as part of the final exam of the JavaScript module i
 # Project description.
 
 In this exercise we have created a web page to search for anime series titles. There is also the option to mark as favourites the series that we like the most, and the favorites section will remain there when you reload the page.
-For this we have used HTML5 markup language, to which we have applied some styles with CSS3 and we have developed the functionality through JavaScript, using arrow functions, lopps, array's methods, conditionals, events and their corresponding handler functions (and therefore callbacks).
+For this we have used HTML5 markup language, to which we have applied some styles with CSS3 and we have developed the functionality through JavaScript using arrow functions, lopps, array's methods, , api call with AJAX, conditionals, events and their corresponding handler functions (and therefore callbacks).
 
 To develop this project we have used two branches: main, which contains the stable version, and dev to add new features or style changes in a more controlled way. Every time the new feature stabilized in development, we merged it with main.
 
