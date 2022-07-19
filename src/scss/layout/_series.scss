@@ -45,6 +45,7 @@
             padding-bottom: 3rem;
             margin: 0 auto;
 
+
             @media all and (min-width: 768px) {
                width: 90%;
                gap: 2rem;
@@ -219,7 +220,6 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position: right center;
-            // filter: grayscale(100%);
         }
 
     }
@@ -230,12 +230,6 @@
     }
 }
 
-// .js-data-not-found {
-//     width: max-content;
-//     position: relative;
-//     bottom: 5vh;
-//     left: calc(50vw - 36rem);
-// }
 
 .favourites__wrapper__defaultImage {
     width: 90%;
